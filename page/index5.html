@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>myReact</title>
+</head>
+<body>
+  <div id="app"></div>
+  <!--
+    引入react的依赖包
+    react.developmengt.js
+    react是react核心库，只要使用react就必须使用
+    下载地址：https://unpkg.com/react@18.0.0/umd/react.development.js
+    全局就有了一个React对象
+
+    react-dom.development.js
+    react-dom是react的dom包，使用react开发web必须使用
+    下载地址：https://unpkg.com/react-dom@18.0.0/umd/react-dom.development.js
+    全局就有了一个ReactDOM对象
+
+    babel.min.js
+    将JSX转换为JS代码
+    下载地址：https://unpkg.com/babel-standalone@6/babel.min.js
+
+  -->
+
+  <!--
+
+  -->
+  
+  <script type="text/javascript" src="../js/react.development.js" ></script> 
+  <script type="text/javascript" src="../js/react-dom.development.js" ></script>
+  <script type="text/javascript" src="../js/babel.min.js"></script>
+  
+  <script type="text/babel" >
+    const data = ['react','vue','angluar']
+    //只允许一个根标签
+    const VDOM = (
+    <div>
+        <h1>前端JS框架列表</h1>
+        <ul>
+            <li>#react</li>
+            <li>#vue</li>
+            <li>#angular</li>
+        </ul>
+        <ul>
+            {
+                data.map((item,index)=>{
+                    return <li style={{color:'black',fontSize:'30px'}} key={index}>{item}</li>
+                })
+            }
+
+        </ul>
+     
+    </div>
+    ) 
+    /*
+    引入react依赖后，
+    全局就有了一个React对象
+     全局就有了一个ReactDOM对象（必须区分大小写）
+    */
+
+ 
+    ReactDOM.render(VDOM,document.getElementById("app"))
+  </script>
+</body>
+
+</html>
