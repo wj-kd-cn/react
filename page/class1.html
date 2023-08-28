@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>类的基础</title>
+</head>
+<body>
+  <script type="text/javascript" >
+   
+   class Person{
+     constructor(name,age){
+        this.name = name
+        this.age = age
+
+     }
+     speak(){
+        console.log(`我的名字叫${this.name},我的年龄是${this.age}`)
+     }
+   }
+   //必须在第一行调用super
+   class Student extends Person{
+    constructor(name,age,grade){
+        super(name,age)
+        this.grade = grade
+        this.school = '大都会'
+    }
+    speak(){
+        console.log(`我的名字叫${this.name},我的年龄是${this.age}，我的年级是${this.grade}`)
+     }
+     study(){
+        console.log('我在努力学习！！！')
+     }
+
+   }
+   class Dog{
+    constructor(type){
+        this.type = type
+    }
+    shut(){
+        console.log(`${this.type}dog is shutting! `)
+    }
+     
+
+   }
+
+   const p1 = new Person('wangjun',30)
+   const p2 = new Person('zhangli',40)
+   const d1 = new Dog('土狗')
+   const s1 = new Student('michael',14,'初一')
+   console.log(p1)
+   console.log(p2)
+   console.log(d1)
+   console.log(s1)
+   p1.speak()
+   p2.speak()
+   s1.speak()
+   d1.shut()
+   s1.study()
+  </script>
+</body>
+
+</html>
