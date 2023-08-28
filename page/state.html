@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>函数组件</title>
+  <title>myReact</title>
 </head>
 <body>
   <div id="app"></div>
@@ -33,14 +33,26 @@
   <script type="text/javascript" src="../js/babel.min.js"></script>
   
   <script type="text/babel" >
-  //第一个函数式组件
-  function Demo1(){
+  //在这里输入组件代码
+  /*
+   1、创建组件
+  */
+   class Weather extends React.Component{
+    constructor(props){
+        super(props)
+        this.state = {isHot:true}
 
-    return <h2>我是用函数定义的组件（适用于【简单组件】的定义）</h2>
 
-  }
-  //渲染组件
-  ReactDOM.render(<Demo1/>,document.getElementById("app"))
+    }
+    render(){
+        console.log(this)
+        return <h2>今天天气很{this.state.isHot ? '炎热':'凉爽'}！</h2>
+    }
+   }
+
+ 
+ 
+    ReactDOM.render(<Weather/>,document.getElementById("app"))
   </script>
 </body>
 
