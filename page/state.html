@@ -46,13 +46,30 @@
     }
     render(){
         console.log(this)
-        return <h2>今天天气很{this.state.isHot ? '炎热':'凉爽'}！</h2>
+        return <h1 id='title' onClick={this.changeWeather} >今天天气很{this.state.isHot ? '炎热':'凉爽'}！</h1>
+        //react重写了页面事件，调用事件必须用react的事件进行调用，如onclick 应写为onClick,
+        //事件不允许是双引号只能使用花括号
+        //且调用事件函数不能使用demo()函数表达式，只能使用函数名demo
+        //
+    }
+    //方法只能在类实例中被调用，调用方法为类名.方法名
+    //方法是放在类的原型对象上，拱类实例使用
+    //通过类实例调用方法时，方法中的this就是实例对象
+    changeWeather(){
+      console.log("this对象实例是谁");
+      console.log(this)
+    // console.log(this.state)
+     // console.log(this.state.wind)
     }
    }
 
  
  
     ReactDOM.render(<Weather/>,document.getElementById("app"))
+
+    function demo(){
+      console.log("按钮被点击了")
+    }
   </script>
 </body>
 
