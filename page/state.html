@@ -38,28 +38,40 @@
    1、创建组件
   */
    class Weather extends React.Component{
+
     constructor(props){
+        console.log("constructor")
         super(props)
+        //super必须在this的调用之前
+        //初始化状态
         this.state = {isHot:true,isTemp:false,wind:'夏风'}
+        //针对方法指定实例对象
+        this.changeWeather = this.changeWeather.bind(this)
 
 
     }
     render(){
-        console.log(this)
-        return <h1 id='title' onClick={this.changeWeather} >今天天气很{this.state.isHot ? '炎热':'凉爽'}！</h1>
+      console.log("render")
+      const {isHot,wind} = this.state
+      return <h1 id='title' onClick={this.changeWeather} >今天天气很{isHot ? '炎热':'凉爽'}！ {wind}</h1>
         //react重写了页面事件，调用事件必须用react的事件进行调用，如onclick 应写为onClick,
         //事件不允许是双引号只能使用花括号
         //且调用事件函数不能使用demo()函数表达式，只能使用函数名demo
-        //
+        //类中的方式默认开启了局部的严格模式
     }
     //方法只能在类实例中被调用，调用方法为类名.方法名
     //方法是放在类的原型对象上，拱类实例使用
     //通过类实例调用方法时，方法中的this就是实例对象
     changeWeather(){
-      console.log("this对象实例是谁");
+      const ishot = this.state.isHot
+      console.log(ishot)
+      console.log(!ishot)
       console.log(this)
-    // console.log(this.state)
-     // console.log(this.state.wind)
+      //严重注意，状态只能通过setState来更新,且更新是一种合并操作，同名的状态的值会被替换，其他的值保持原值不变。
+      this.setState({isHot:!ishot});
+
+
+
     }
    }
 
@@ -68,8 +80,9 @@
     ReactDOM.render(<Weather/>,document.getElementById("app"))
 
     function demo(){
-      console.log("按钮被点击了")
+      console.log("标题被点击了")
     }
+    demo()
   </script>
 </body>
 
