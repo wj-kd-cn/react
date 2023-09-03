@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>myReact</title>
+</head>
+<body>
+  <div id="app"></div>
+  <!--
+    引入react的依赖包
+    react.developmengt.js
+    react是react核心库，只要使用react就必须使用
+    下载地址：https://unpkg.com/react@18.0.0/umd/react.development.js
+    全局就有了一个React对象
+
+    react-dom.development.js
+    react-dom是react的dom包，使用react开发web必须使用
+    下载地址：https://unpkg.com/react-dom@18.0.0/umd/react-dom.development.js
+    全局就有了一个ReactDOM对象
+
+    babel.min.js
+    将JSX转换为JS代码
+    下载地址：https://unpkg.com/babel-standalone@6/babel.min.js
+
+  -->
+
+  <!--
+
+  -->
+  
+  <script type="text/javascript" src="../js/react.development.js" ></script> 
+  <script type="text/javascript" src="../js/react-dom.development.js" ></script>
+  <script type="text/javascript" src="../js/babel.min.js"></script>
+  
+  <script type="text/babel" >
+  //在这里输入组件代码
+  /*
+   1、创建组件
+  */
+   class Weather extends React.Component{
+
+    state = {isHot:true,isTemp:false,wind:'夏风'}
+
+
+    render(){
+      console.log("render")
+      const {isHot,wind} = this.state
+      return <h1 id='title' onClick={this.changeWeather} >今天天气很{isHot ? '炎热':'凉爽'}！ {wind}</h1>
+
+    }
+//要用赋值语句+箭头函数
+//组件自定义方法中this为undefine,如何解决
+   //1、强制绑定this通过函数对象的bind()
+   //2、箭头函数
+    changeWeather = ()=>{
+      const ishot = this.state.isHot
+      console.log(ishot)
+      console.log(!ishot)
+      console.log(this)
+      //严重注意，状态只能通过setState来更新,且更新是一种合并操作，同名的状态的值会被替换，其他的值保持原值不变。
+      this.setState({isHot:!ishot});
+
+
+
+    }
+   }
+
+ 
+ 
+    ReactDOM.render(<Weather/>,document.getElementById("app"))
+
+    function demo(){
+      console.log("标题被点击了")
+    }
+    demo()
+  </script>
+</body>
+
+</html>
