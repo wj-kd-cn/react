@@ -5,7 +5,9 @@
   <title>myReact</title>
 </head>
 <body>
-  <div id="app"></div>
+  <div id="app1"></div>
+  <div id="app2"></div>
+  <div id="app3"></div>
   <!--
     引入react的依赖包
     react.developmengt.js
@@ -34,43 +36,26 @@
   
   <script type="text/babel" >
   //在这里输入组件代码
-  /*
-   1、创建组件
-  */
-   class Weather extends React.Component{
+    class Person extends React.Component{
 
-    state = {isHot:true,isTemp:false,wind:'夏风'}
+        state = {name:'TOM',age:18,sex:'male'};
 
-
-    render(){
-      console.log("render")
-      const {isHot,wind} = this.state
-      return <h1 id='title' onClick={this.changeWeather} >今天天气很{isHot ? '炎热':'凉爽'}！ {wind}</h1>
-
+        render(){
+            console.log("person")
+            console.log(this)
+            return <ul>
+                        <li>姓名：{this.props.name}</li>
+                        <li>性别：{this.props.sex}</li>
+                        <li>年龄：{this.props.age}</li>
+                        
+                
+                </ul>
+        }
     }
-//要用赋值语句+箭头函数
-//组件自定义方法中this为undefine,如何解决
-   //1、强制绑定this通过函数对象的bind()
-   //2、箭头函数
-    changeWeather = ()=>{
-      const ishot = this.state.isHot
-      //严重注意，状态只能通过setState来更新,且更新是一种合并操作，同名的状态的值会被替换，其他的值保持原值不变。
-      this.setState({isHot:!ishot});
-     
-
-
-
-    }
-   }
-
  
- 
-    ReactDOM.render(<Weather/>,document.getElementById("app"))
-
-    function demo(){
-      console.log("标题被点击了")
-    }
-    demo()
+    ReactDOM.render(<Person name="TOM" sex="女" age="18"/>,document.getElementById("app1"))
+    ReactDOM.render(<Person name="Jerry" sex="男" age="38"/>,document.getElementById("app2"))
+    ReactDOM.render(<Person name="Michael" sex="老" age="68"/>,document.getElementById("app3"))
   </script>
 </body>
 
