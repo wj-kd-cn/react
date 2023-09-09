@@ -24,6 +24,10 @@
     将JSX转换为JS代码
     下载地址：https://unpkg.com/babel-standalone@6/babel.min.js
 
+    prop-types.js
+    下载方式：yarn add prop-types.js
+    全局就有了一个PropTypes对象
+
   -->
 
   <!--
@@ -33,12 +37,15 @@
   <script type="text/javascript" src="../js/react.development.js" ></script> 
   <script type="text/javascript" src="../js/react-dom.development.js" ></script>
   <script type="text/javascript" src="../js/babel.min.js"></script>
-  
+  <script type="text/javascript" src="../js/prop-types.js"></script>
+
   <script type="text/babel" >
   //在这里输入组件代码
     class Person extends React.Component{
 
         state = {name:'TOM',age:18,sex:'male'};
+
+
 
         render(){
             console.log("person")
@@ -46,14 +53,26 @@
             return <ul>
                         <li>姓名：{this.props.name}</li>
                         <li>性别：{this.props.sex}</li>
-                        <li>年龄：{this.props.age}</li>
+                        <li>年龄：{this.props.age + 1}</li>
                         
                 
                 </ul>
         }
+        
+
+    }
+    //对类的标签属性进行限制
+    Person.propTypes = {
+            name:PropTypes.string.isQequired
+
+    }
+    //对类的标签属性设定默认值
+    Person.defalutProps = {
+        sex:'不男不女',
+        age:18
     }
  
-    ReactDOM.render(<Person name="TOM" sex="女" age="18"/>,document.getElementById("app1"))
+    ReactDOM.render(<Person name="11" sex="女" age={18}/>,document.getElementById("app1"))
     ReactDOM.render(<Person name="Jerry" sex="男" age="38"/>,document.getElementById("app2"))
     ReactDOM.render(<Person name="Michael" sex="老" age="68"/>,document.getElementById("app3"))
   </script>
