@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>myReact</title>
+</head>
+<body>
+  <div id="app1"></div>
+  <div id="app2"></div>
+  <div id="app3"></div>
+  <!--
+    引入react的依赖包
+    react.developmengt.js
+    react是react核心库，只要使用react就必须使用
+    下载地址：https://unpkg.com/react@18.0.0/umd/react.development.js
+    全局就有了一个React对象
+
+    react-dom.development.js
+    react-dom是react的dom包，使用react开发web必须使用
+    下载地址：https://unpkg.com/react-dom@18.0.0/umd/react-dom.development.js
+    全局就有了一个ReactDOM对象
+
+    babel.min.js
+    将JSX转换为JS代码
+    下载地址：https://unpkg.com/babel-standalone@6/babel.min.js
+
+    prop-types.js
+    下载方式：yarn add prop-types.js
+    全局就有了一个PropTypes对象
+
+  -->
+
+  <!--
+
+  -->
+  
+  <script type="text/javascript" src="../js/react.development.js" ></script> 
+  <script type="text/javascript" src="../js/react-dom.development.js" ></script>
+  <script type="text/javascript" src="../js/babel.min.js"></script>
+  <script type="text/javascript" src="../js/prop-types.js"></script>
+
+  <script type="text/babel" >
+  //在这里输入组件代码
+    class Person extends React.Component{
+
+
+        //通过给state属性进行初始化赋值
+        //为事件处理函数绑定实例bind
+        //如果需要通过实例this.props来使用标签属性，则需要在构造器中调用props.
+        constructor(props){
+
+            super(props)
+            console.log(this.props)
+
+        }
+
+        state = {name:'TOM',age:18,sex:'male'};
+
+            //对类的标签属性(string,number)和必要性isRequired进行限制
+            //在类中定义标签属性和默认值，需要在前面加static
+        static propTypes = {
+            name:PropTypes.string.isRequired,
+            sex:PropTypes.string,
+            age:PropTypes.number,
+            speak:PropTypes.func,
+
+        }
+     //对类的标签属性设定默认值
+        static defaultProps = {
+             sex:'不男不女',
+             age:18,
+             //speak:speak()
+        }
+
+        spoke(){
+        console.log(this.props.name," is  speak ! ")
+        }
+
+
+        render(){
+            console.log("person")
+            console.log(this)
+            //props是只读的
+            return <ul>
+                        <li>姓名：{this.props.name}</li>
+                        <li>性别：{this.props.sex}</li>
+                        <li>年龄：{this.props.age + 1}</li>
+                        
+                
+                </ul>
+        }
+        
+
+    }
+
+    function speak(){
+        console.log("I'm  speak ! ")
+    
+    }
+
+    ReactDOM.render(<Person name="TOM" speak={speak()} />,document.getElementById("app1"))
+
+
+  </script>
+</body>
+
+</html>
