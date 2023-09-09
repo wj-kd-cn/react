@@ -45,11 +45,26 @@
 
         state = {name:'TOM',age:18,sex:'male'};
 
+            //对类的标签属性(string,number)和必要性isRequired进行限制
+            //在类中定义标签属性和默认值，需要在前面加static
+        static propTypes = {
+            name:PropTypes.string.isRequired,
+            sex:PropTypes.string,
+            age:PropTypes.number,
+            speak:PropTypes.func,
+
+        }
+     //对类的标签属性设定默认值
+        static defaultProps = {
+             sex:'不男不女',
+             age:18
+        }
 
 
         render(){
             console.log("person")
             console.log(this)
+            //props是只读的
             return <ul>
                         <li>姓名：{this.props.name}</li>
                         <li>性别：{this.props.sex}</li>
@@ -61,22 +76,16 @@
         
 
     }
-    //对类的标签属性(string,number)和必要性isRequired进行限制
-    Person.propTypes = {
-            name:PropTypes.string.isRequired,
-            sex:PropTypes.string,
-            age:PropTypes.number
 
-    }
-    //对类的标签属性设定默认值
-    Person.defaultProps = {
-        sex:'不男不女',
-        age:18
-    }
+
  
-    ReactDOM.render(<Person name="TOM" sex="女"/>,document.getElementById("app1"))
+    ReactDOM.render(<Person name="TOM" sex="女" speak={speak}/>,document.getElementById("app1"))
     ReactDOM.render(<Person name="Jerry" age={35}/>,document.getElementById("app2"))
     ReactDOM.render(<Person name="Michael" sex="老" age={68}/>,document.getElementById("app3"))
+
+    function speak(){
+        console.log("I'm speak ! ")
+    }
   </script>
 </body>
 
