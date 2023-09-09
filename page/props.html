@@ -61,7 +61,7 @@
         
 
     }
-    //对类的标签属性进行限制
+    //对类的标签属性(string,number)和必要性isRequired进行限制
     Person.propTypes = {
             name:PropTypes.string.isRequired,
             sex:PropTypes.string,
@@ -74,9 +74,9 @@
         age:18
     }
  
-    ReactDOM.render(<Person sex="女" age={18}/>,document.getElementById("app1"))
-    ReactDOM.render(<Person name="Jerry" age="38"/>,document.getElementById("app2"))
-    ReactDOM.render(<Person name="Michael" sex="老" age="68"/>,document.getElementById("app3"))
+    ReactDOM.render(<Person name="TOM" sex="女"/>,document.getElementById("app1"))
+    ReactDOM.render(<Person name="Jerry" age={35}/>,document.getElementById("app2"))
+    ReactDOM.render(<Person name="Michael" sex="老" age={68}/>,document.getElementById("app3"))
   </script>
 </body>
 
