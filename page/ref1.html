@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>ref</title>
+</head>
+<body>
+  <div id="app"></div>
+  <!--
+    引入react的依赖包
+    react.developmengt.js
+    react是react核心库，只要使用react就必须使用
+    下载地址：https://unpkg.com/react@18.0.0/umd/react.development.js
+    全局就有了一个React对象
+
+    react-dom.development.js
+    react-dom是react的dom包，使用react开发web必须使用
+    下载地址：https://unpkg.com/react-dom@18.0.0/umd/react-dom.development.js
+    全局就有了一个ReactDOM对象
+
+    babel.min.js
+    将JSX转换为JS代码
+    下载地址：https://unpkg.com/babel-standalone@6/babel.min.js
+
+  -->
+
+  <!--
+
+  -->
+  
+  <script type="text/javascript" src="../js/react.development.js" ></script> 
+  <script type="text/javascript" src="../js/react-dom.development.js" ></script>
+  <script type="text/javascript" src="../js/babel.min.js"></script>
+  
+  <script type="text/babel" >
+
+  //在这里输入组件代码
+
+  class Demo extends React.Component{
+
+
+    //类中的函数推荐使用箭头函数申明
+    //string的ref存在效率问题，在新的react版本中不推荐会被取消
+    showData1 =()=>{
+        const {input1} = this
+        console.log(input1.value)
+        alert(input1.value)
+
+    }
+
+    showData2 =()=>{
+        const {input2} = this
+        console.log(input2.value)
+        alert(input2.value)
+
+    }
+
+    render(){
+
+        return <div>
+            <input ref={(currentValue)=>{this.input1 = currentValue}} type="text"  placeholder="点击按钮提示数据" />
+            <button ref="btn1" onClick={this.showData1}>点我提示左侧数据</button>
+            <input ref={c =>this.input2 = c}  onBlur={this.showData2} type="text" placeholder="失去焦点提示数据" />
+        </div>
+    }
+   
+  }
+ 
+    ReactDOM.render(<Demo/>,document.getElementById("app"))
+  </script>
+</body>
+
+</html>
