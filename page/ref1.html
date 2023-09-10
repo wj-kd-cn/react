@@ -39,7 +39,7 @@
   class Demo extends React.Component{
 
 
-    //类中的函数推荐使用箭头函数申明
+    //类中的函数推荐使用箭头函数申明,可获得实例this
     //string的ref存在效率问题，在新的react版本中不推荐会被取消
     showData1 =()=>{
         const {input1} = this
@@ -58,7 +58,7 @@
     render(){
 
         return <div>
-            <input ref={(currentValue)=>{this.input1 = currentValue}} type="text"  placeholder="点击按钮提示数据" />
+            <input ref={(currentNode)=>{this.input1 = currentNode}} type="text"  placeholder="点击按钮提示数据" />
             <button ref="btn1" onClick={this.showData1}>点我提示左侧数据</button>
             <input ref={c =>this.input2 = c}  onBlur={this.showData2} type="text" placeholder="失去焦点提示数据" />
         </div>
