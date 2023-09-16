@@ -57,7 +57,7 @@
     }
 
 
-    showMessage = (currentNode)=>{
+    setInputRef = (currentNode)=>{
         this.input1 = currentNode;
         console.log('@',currentNode);
 
@@ -74,7 +74,7 @@
             {/*   内联函数ref使用方式,state变化时，才是变更页面  */}
             {/*<input  ref={(c)=>{this.input1 = c;console.log('@',c)}} type="text"  placeholder="点击按钮提示数据" /><br/><br/> */}
             {/*   类绑定函数ref使用方式  */}
-            <input  ref={this.showMessage} type="text" placeholder="点击按钮提示数据" /><br/><br/>
+            <input  ref={this.setInputRef} type="text" placeholder="点击按钮提示数据" /><br/><br/>
             <button ref="btn1" onClick={this.showData1}>点我提示左侧数据</button>
             <button onClick={this.changeHot} >点我修改天气</button>
         </div>
