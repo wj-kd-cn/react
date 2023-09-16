@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>createRef</title>
+</head>
+<body>
+  
+  <!--
+    引入react的依赖包
+    react.developmengt.js
+    react是react核心库，只要使用react就必须使用
+    下载地址：https://unpkg.com/react@18.0.0/umd/react.development.js
+    全局就有了一个React对象
+
+    react-dom.development.js
+    react-dom是react的dom包，使用react开发web必须使用
+    下载地址：https://unpkg.com/react-dom@18.0.0/umd/react-dom.development.js
+    全局就有了一个ReactDOM对象
+
+    babel.min.js
+    将JSX转换为JS代码
+    下载地址：https://unpkg.com/babel-standalone@6/babel.min.js
+
+  -->
+
+  <!--
+    引入React的js依赖
+  -->
+  <script type="text/javascript" src="../js/react.development.js" ></script> 
+  <script type="text/javascript" src="../js/react-dom.development.js" ></script>
+  <script type="text/javascript" src="../js/babel.min.js"></script>
+  <!--
+    页面控件展现
+  -->
+  <div id="app"></div>
+  <!--
+    Recat代码
+  -->
+  <script type="text/babel" >
+  //在这里输入组件代码
+  /*
+   1、创建组件
+  */
+   class Demo extends React.Component{
+
+    //创建ref，
+    /*
+       不要过度的使用Ref
+       （1）通过onXxxxx属性指定事件处理函数（注意大小写）
+            a、React使用的是自定义（合成）事件，而不是使用原生DOM事件 --- 为了更好的兼容性
+            b、React中的事件是通过事件委托方式处理的（委托给组件最外层元素） --- 为了高效
+        （2）通过event.target得到发生事件的DOM元素对象 --- 不要过度使用Ref
+        （3）使用Ref的原则：当引用和调用的元素是同一个时，可不使用Ref
+        
+        */
+     myRef1 = React.createRef();
+     
+     a = 1;
+
+    showMessage = () => {
+        console.log(this.myRef1.current)
+        alert(this.myRef1.current.value)
+    }
+
+    blurMsg = () => {
+        console.log(this.event.target)
+        alert(this.event.target.value)
+
+    }
+
+
+    render(){
+      console.log(this)
+      return (
+        <div>
+        <input ref={this.myRef1} type="text" placeholder="点击按钮提示数据" /><br/><br/>
+        <button ref="btn1" onClick={this.showMessage}>点我提示左侧数据</button>
+        <br/><br/>
+        <input  onBlur={this.blurMsg} type="text" placeholder="失去焦点提示数据" />
+        </div>
+      )
+
+    }
+
+   }
+    ReactDOM.render(<Demo/>,document.getElementById("app"))
+
+  </script>
+</body>
+
+</html>
