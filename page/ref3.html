@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>myReact</title>
+  <title>createRef</title>
 </head>
 <body>
   
@@ -25,54 +25,59 @@
   -->
 
   <!--
-
+    引入React的js依赖
   -->
-  
   <script type="text/javascript" src="../js/react.development.js" ></script> 
   <script type="text/javascript" src="../js/react-dom.development.js" ></script>
   <script type="text/javascript" src="../js/babel.min.js"></script>
-
+  <!--
+    页面控件展现
+  -->
   <div id="app"></div>
-  
+  <!--
+    Recat代码
+  -->
   <script type="text/babel" >
   //在这里输入组件代码
   /*
    1、创建组件
   */
-   class Weather extends React.Component{
+   class Demo extends React.Component{
 
-    state = {isHot:true,isTemp:false,wind:'夏风'}
+    //创建ref，
+     myRef1 = React.createRef();
+     myRef2 = React.createRef();
+     
+     a = 1;
+
+    showMessage = () => {
+        console.log(this.myRef1.current)
+        alert(this.myRef1.current.value)
+    }
+
+    blurMsg = () => {
+        console.log(this.myRef2.current)
+        alert(this.myRef2.current.value)
+
+    }
 
 
     render(){
-      console.log("render")
-      const {isHot,wind} = this.state
-      return <h1 id='title' onClick={this.changeWeather} >今天天气很{isHot ? '炎热':'凉爽'}！ {wind}</h1>
+      console.log(this)
+      return (
+        <div>
+        <input ref={this.myRef1} type="text" placeholder="点击按钮提示数据" /><br/><br/>
+        <button ref="btn1" onClick={this.showMessage}>点我提示左侧数据</button>
+        <br/><br/>
+        <input ref={this.myRef2} onBlur={this.blurMsg} type="text" placeholder="失去焦点提示数据" />
+        </div>
+      )
 
     }
-//要用赋值语句+箭头函数
-//组件自定义方法中this为undefine,如何解决
-   //1、强制绑定this通过函数对象的bind()
-   //2、箭头函数
-    changeWeather = ()=>{
-      const ishot = this.state.isHot
-      //严重注意，状态只能通过setState来更新,且更新是一种合并操作，同名的状态的值会被替换，其他的值保持原值不变。
-      this.setState({isHot:!ishot});
-     
 
-
-
-    }
    }
+    ReactDOM.render(<Demo/>,document.getElementById("app"))
 
- 
- 
-    ReactDOM.render(<Weather/>,document.getElementById("app"))
-
-    function demo(){
-      console.log("标题被点击了")
-    }
-    demo()
   </script>
 </body>
 
