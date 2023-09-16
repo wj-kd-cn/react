@@ -2,10 +2,10 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>ref</title>
+  <title>内调函数和类绑定函数</title>
 </head>
 <body>
-  <div id="app"></div>
+  
   <!--
     引入react的依赖包
     react.developmengt.js
@@ -32,42 +32,56 @@
   <script type="text/javascript" src="../js/react-dom.development.js" ></script>
   <script type="text/javascript" src="../js/babel.min.js"></script>
   
+  <div id="app"></div>
+  
   <script type="text/babel" >
 
   //在这里输入组件代码
 
   class Demo extends React.Component{
 
-
+    state={isHot:true,isLive:false,isWind:"Large"}
     //类中的函数推荐使用箭头函数申明,可获得实例this
     //string的ref存在效率问题，在新的react版本中不推荐会被取消
-    showData1 =()=>{
+    showData1 = ()=>{
+        
         const {input1} = this
         console.log(input1.value)
         alert(input1.value)
 
     }
-
-    showData2 =()=>{
-        const {input2} = this
-        console.log(input2.value)
-        alert(input2.value)
-
+    changeHot = ()=> {
+        const {isHot} = this.state
+        //修改状态必须使用setState方法，状态必须使用键值对
+        this.setState({isHot:!isHot})
     }
 
+
+    showMessage = (currentNode)=>{
+        this.input1 = currentNode;
+        console.log('@',currentNode);
+
+    }
     render(){
-
-        return <div>
-            {/*   内联函数  */}
-            <input ref={(currentNode)=>{this.input1 = currentNode}} type="text"  placeholder="点击按钮提示数据" />
+        console.log(this);
+        const {isHot,isWind,isLive} = this.state;
+        console.log("isHot: ",isHot,", isWind: ",isWind,", isLive: ",isLive);
+        return (
+            <div>
+            <h2>今天天气很{isHot ? "炎热" : '凉快'}</h2>
+            {/*   字符串ref使用方式  */}
+            {/*<input  ref="input1" type="text"  placeholder="点击按钮提示数据" />*/}
+            {/*   内联函数ref使用方式,state变化时，才是变更页面  */}
+            {/*<input  ref={(c)=>{this.input1 = c;console.log('@',c)}} type="text"  placeholder="点击按钮提示数据" /><br/><br/> */}
+            {/*   类绑定函数ref使用方式  */}
+            <input  ref={this.showMessage} type="text" placeholder="点击按钮提示数据" /><br/><br/>
             <button ref="btn1" onClick={this.showData1}>点我提示左侧数据</button>
-            <input ref={c =>this.input2 = c}  onBlur={this.showData2} type="text" placeholder="失去焦点提示数据" />
+            <button onClick={this.changeHot} >点我修改天气</button>
         </div>
+        )
     }
-   
   }
- 
-    ReactDOM.render(<Demo/>,document.getElementById("app"))
+  ReactDOM.render(<Demo/>,document.getElementById("app"))
   </script>
 </body>
 
