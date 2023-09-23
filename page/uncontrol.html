@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>类组件模板页面</title>
+  <title>非受控组件页面</title>
 </head>
 <body>
  
@@ -36,17 +36,29 @@
   
   <script type="text/babel" >
   //在这里输入组件代码
-    class Demo extends React.Component{
+    class UnControl extends React.Component{
+      toSubmit = () =>{
+        const{username,password} = this
+       // alert(password.value)
+       alert(`用户名： ${username.value}  密码： ${password.value}`)
+
+      }
       render(){
         return(
-          <h2>编写HTML组件代码</h2>
+          <form action="" onSubmit={this.toSubmit}>
+
+            用户名：<input ref={(c) =>{this.username = c}} type="text" name="username"/>
+            密  码：<input ref={(c) =>{this.password = c}} type="password" name="password"/>
+            <button>登录</button>
+          
+          </form>
 
 
         )
       }
     }
  
-    ReactDOM.render(<Demo/>,document.getElementById("app"))
+    ReactDOM.render(<UnControl/>,document.getElementById("app"))
   </script>
 </body>
 

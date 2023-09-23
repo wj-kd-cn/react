@@ -2,10 +2,10 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>类组件模板页面</title>
+  <title>myReact</title>
 </head>
 <body>
- 
+  <div id="app"></div>
   <!--
     引入react的依赖包
     react.developmengt.js
@@ -24,29 +24,19 @@
 
   -->
 
+  <!--
 
+  -->
   
   <script type="text/javascript" src="../js/react.development.js" ></script> 
   <script type="text/javascript" src="../js/react-dom.development.js" ></script>
   <script type="text/javascript" src="../js/babel.min.js"></script>
-    <!--
-       渲染ReactDOM页面组件
-  -->
-  <div id="app"></div>
   
   <script type="text/babel" >
   //在这里输入组件代码
-    class Demo extends React.Component{
-      render(){
-        return(
-          <h2>编写HTML组件代码</h2>
-
-
-        )
-      }
-    }
  
-    ReactDOM.render(<Demo/>,document.getElementById("app"))
+ 
+    ReactDOM.render(VDOM,document.getElementById("app"))
   </script>
 </body>
 
