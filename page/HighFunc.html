@@ -70,6 +70,16 @@
         }
 
       }
+      // 非柯里化函数的写法：setFormData2('username',event)
+
+      setFormData2 = (dataType,event) => {
+
+            console.log('@',dataType,event.target.value)
+            //[dataType]其中[]为参数取值运算符
+            this.setState({[dataType]:event.target.value})
+
+
+      }
 
       toSubmit = (event) => {
         event.preventDefault()
@@ -80,12 +90,13 @@
 
       }
       // {<!--事件回调，不能带小括号，因为你把回调的返回值作为了回调，没有把函数作为回调-->}
+      // 非柯里化函数的写法：{event => this.setFormData2('username',event)}
       render(){
         console.log(this)
         return(
           <form action="" onSubmit={this.toSubmit}>
             
-             用户名：<input onChange={this.setFormData('username')} type="text" name="username"/>
+             用户名：<input onChange={event => this.setFormData2('username',event)} type="text" name="username"/>
              密  码：<input onChange={this.setFormData('password')} type="password" name="password"/>
             <button>登录</button>
 
