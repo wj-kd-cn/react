@@ -37,13 +37,17 @@
   <script type="text/babel" >
   //在这里输入组件代码
     class UnControl extends React.Component{
-      toSubmit = () =>{
+      toSubmit = (event) =>{
         const{username,password} = this
+        //阻止事件刷新
+        event.preventDefault()
        // alert(password.value)
+       console.log(`用户名： ${username.value}  密码： ${password.value}`)
        alert(`用户名： ${username.value}  密码： ${password.value}`)
 
       }
       render(){
+        console.log(this)
         return(
           <form action="" onSubmit={this.toSubmit}>
 

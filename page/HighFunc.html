@@ -43,15 +43,34 @@
         username:'',
         password:''
       }
+      //region 和 endregion 可以折叠注释
+      //#region
+          /*
+          高阶函数：如果一个函数符合以下2个规范中的任何一个，那该函数为高阶函数
+          1、若A函数，接收的参数是一个函数，那么A函数就是高阶函数
+          2、若A函数，调用的返回值依然是一个函数，那么A就可以称之为一个高阶函数
 
-      setUsername = (event) => {
-        this.setState({username:event.target.value})
+          函数柯里化：通过函数调用继续返回函数的方式，实现多次接收参数最后统一处理的函数编码形式
+
+          */
+
+      //#endregion
+
+
+
+
+      
+      setFormData = (dataType) => {
+        console.log(dataType)
+        return (event) =>{
+            console.log('@',dataType,event.target.value)
+            //[dataType]其中[]为参数取值运算符
+            this.setState({[dataType]:event.target.value})
+
+        }
 
       }
-      setPassword = (event) => {
-        this.setState({password:event.target.value})
 
-      }
       toSubmit = (event) => {
         event.preventDefault()
         const{username,password} = this.state
@@ -60,14 +79,14 @@
 
 
       }
-      
+      // {<!--事件回调，不能带小括号，因为你把回调的返回值作为了回调，没有把函数作为回调-->}
       render(){
         console.log(this)
         return(
           <form action="" onSubmit={this.toSubmit}>
-
-             用户名：<input onChange={this.setUsername} type="text" name="username"/>
-             密  码：<input onChange={this.setPassword} type="password" name="password"/>
+            
+             用户名：<input onChange={this.setFormData('username')} type="text" name="username"/>
+             密  码：<input onChange={this.setFormData('password')} type="password" name="password"/>
             <button>登录</button>
 
           </form>
