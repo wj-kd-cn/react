@@ -39,16 +39,55 @@
    //第二步，编辑类组件
     class Lifetimer extends React.Component{
 
+
+      state ={opacity:1}
+
       delComp = () => {
         //卸载组件从指定的节点
         ReactDOM.unmountComponentAtNode(document.getElementById("app"))
+      }
+      //组件挂载完毕执行
+      componentDidMount(){
+        console.log("@componentDidMount")
+        setInterval(()=>{
+            let opacity = this.state.opacity;
+            opacity -= 0.1;
+            if(opacity <= 0) opacity = 1
+            this.setState({opacity:opacity})
+        },200);
+
+
 
       }
+
+      componentWillUnmount(){
+
+      }
+
+      
+      toRender=() => {
+
+        setInterval(()=>{
+            let opacity = this.state.opacity;
+            opacity -= 0.1;
+            if(opacity <= 0) opacity = 1
+            this.setState({opacity:opacity})
+        },200);
+
+      }
+      
+
+      //render调用事件，组件渲染和修改状态
       render(){
+
+
+        console.log("@render")
+
         return(
         <div>
-          <h2>React 学不会怎么办</h2>
+          <h2 style={{opacity:this.state.opacity}}>React 学不会怎么办</h2>
           <button onClick={this.delComp}>不活了</button>
+          <button onClick={this.toRender}>挂载</button>
         </div>
 
 
