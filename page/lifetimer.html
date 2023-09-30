@@ -38,11 +38,17 @@
   <script type="text/babel" >
    //第二步，编辑类组件
     class Lifetimer extends React.Component{
+
+      delComp = () => {
+        //删除组件从指定的节点
+        ReactDOM.unmountComponentAtNode(document.getElementById("app"))
+
+      }
       render(){
         return(
         <div>
           <h2>React 学不会怎么办</h2>
-          <button>不活了</button>
+          <button onClick={this.delComp}>不活了</button>
         </div>
 
 
