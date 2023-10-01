@@ -57,10 +57,15 @@
 
       }
 
+      //卸载组件
       delete = () => {
 
         ReactDOM.unmountComponentAtNode(document.getElementById("app"))
 
+      }
+      //强制更新组件
+      forceUpd = () => {
+        this.forceUpdate()
       }
       //组件将要挂载
       componentWillMount(){
@@ -94,7 +99,7 @@
             <h2>当前页面合计{count}</h2>
             <button onClick={this.count}>点我+1</button>
             <button onClick={this.delete}>卸载</button>
-            
+            <button onClick={this.forceUpd}>强制更新</button>
           </div>
          
 
