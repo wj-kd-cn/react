@@ -38,11 +38,25 @@
   <script type="text/babel" >
    //第二步，编辑类组件
     class LifeCount extends React.Component{
+      //初始化组件状态
+      state = {count:0}
+
+
+      //累计计算
+      count = () => {
+
+        const {count} = this.state
+        this.setState({count:count + 1})
+
+      }
+      //渲染组件  
       render(){
+        const {count} = this.state
         return(
           <div>
 
-            <h2>当前页面合计？？？</h2>
+            <h2>当前页面合计{count}</h2>
+            <button onClick={this.count}>点我+1</button>
             
           </div>
          
