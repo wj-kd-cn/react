@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <!-- 第一步，编辑页面名称 -->
-  <title>类组件模板页面</title>
+  <title>生命周期回调函数旧模式页面</title>
 </head>
 <body>
  
@@ -38,8 +38,15 @@
   <script type="text/babel" >
    //第二步，编辑类组件
     class LifeCount extends React.Component{
-      //初始化组件状态
-      state = {count:0}
+
+      constructor(props){
+        console.log('LifeCount--->constructor')
+        super(props)
+         //初始化组件状态
+        this.state = {count:0}
+
+      }
+     
 
 
       //累计计算
@@ -49,14 +56,44 @@
         this.setState({count:count + 1})
 
       }
+
+      delete = () => {
+
+        ReactDOM.unmountComponentAtNode(document.getElementById("app"))
+
+      }
+      //组件将要挂载
+      componentWillMount(){
+        console.log('LifeCount--->componentWillMount')
+
+      }
+      //组件挂载完成
+      componentDidMount(){
+        console.log('LifeCount--->componentDidMount')
+      }
+      //组件将要卸载
+      componentWillUnmount(){
+        console.log('LifeCount--->componentWillUnmount')
+      }
+      //组件是否可以更新，需要返回true或false
+      shouldComponentUpdate(){        
+        console.log('LifeCount--->shouldComponentUpdate')
+        return true
+      }
+      //组件将要更新
+      componentWillUpdate(){
+        console.log('LifeCount--->componentWillUpdate')
+      }
       //渲染组件  
       render(){
+        console.log('LifeCount--->render')
         const {count} = this.state
         return(
           <div>
 
             <h2>当前页面合计{count}</h2>
             <button onClick={this.count}>点我+1</button>
+            <button onClick={this.delete}>卸载</button>
             
           </div>
          
