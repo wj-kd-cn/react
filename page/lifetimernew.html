@@ -83,11 +83,7 @@
       forceUpd = () => {
         this.forceUpdate()
       }
-      //组件将要挂载
-      UNSAFE_componentWillMount(){
-        console.log('LifeCount--->componentWillMount')
 
-      }
       //组件挂载完成
       componentDidMount(){
         console.log('LifeCount--->componentDidMount')
@@ -101,10 +97,23 @@
         console.log('LifeCount--->shouldComponentUpdate')
         return true
       }
-      //组件将要更新
-      UNSAFE_componentWillUpdate(){
-        console.log('LifeCount--->componentWillUpdate')
+
+      componentDidUpdate(prevProps,prevState,snapshot){
+        console.log('LifeCount--->componentDidUpdate',prevProps,prevState,snapshot)
       }
+      //若state的值取决于props.则可以使用本钩子函数
+      static getDerivedStateFromProps(props,state){
+        console.log('LifeCount--->getDerivedStateFromProps',props,state)
+        return null
+
+      }
+      //在页面完成更新之前，获取快照对象
+      getSnapshotBeforeUpdate(prevProps,prevState){
+        console.log('LifeCount--->getSnapshotBeforeUpdate',prevProps,prevState)
+        return {name:'wangjun',age:30,company:"ansuo"}
+
+      }
+
       //渲染组件  
       render(){
         console.log('LifeCount--->render')
@@ -123,65 +132,12 @@
         )
       }
     }
-    //父组件
-    class A extends React.Component{
 
-        state={carName:'奔驰',carType:'G630'}
-
-        changeCarname = () =>{
-            
-            this.setState({carName:'宝马',carType:'X5'})
-        }
-
-        render(){
-            console.log('A--->render')
-            const {carName,carType} = this.state
-            return (
-              
-              <div>
-                 <h2>A汽车品牌: {carName} , 汽车型号：{carType}</h2>
-                 <B carName={this.state.carName} carType={this.state.carType}/>
-                 <button onClick={this.changeCarname}>更换品牌和型号</button>
-
-              </div>
-
-            )
-        }
-
-    }
-    //子组件
-    class B extends React.Component{
-
-        UNSAFE_componentWillRecevieProps(props){
-            console.log("B--->componentWillRecevieProps",props)
-        }
-
-              //组件是否可以更新，需要返回true或false
-      shouldComponentUpdate(){        
-        console.log('B--->shouldComponentUpdate')
-        return false
-      }
-      //组件将要更新
-      UNSAFE_componentWillUpdate(){
-        console.log('B--->componentWillUpdate')
-      }
-        
-        render(){
-            console.log("B--->render")
-            const {carName,carType} = this.props
-            return (
-                
-                    <h2>B的汽车型号为: {carName},汽车型号为： {carType} </h2>
-                
-
-            )
-        }
-
-    }
+    
     
     //第三步，编辑渲染组件
    // ReactDOM.render(<LifeCount/>,document.getElementById("app"))
-    ReactDOM.render(<A/>,document.getElementById("app"))
+    ReactDOM.render(<LifeCount name='wangjun' count={11}/>,document.getElementById("app"))
     
   </script>
 </body>
