@@ -48,17 +48,63 @@
   
   <script type="text/babel" >
    //第二步，编辑类组件，只允许一个根标签
+       /*
+       1、初始化阶段：由ReactDOM.render()触发 -- 初次渲染
+             1. constructor()
+             2. getDerivedStateFromProps()
+             3. render()
+             4. componentDidMount()  ---- 常用，场景：开启定时器，发送网络请求，订阅消息....一些初始化的工作
+        2、更新阶段：由组件内部this.setState()或父组件render触发
+             1. shouldComponentUpdate()
+             2. getSnapshotBeforeUpdate()    
+             3. render()
+             4. componentDidUpdate()
+        3、卸载阶段：由ReactDOM.unmountComponentAtNode()触发
+             1.componentWillUnmount() ---- 常用，场景：关闭定时器，取消订阅消息...
+
+    */
     class NewsList extends React.Component{
+
+      state = {newsArr:[]}
+      
+      //钩子函数，初始化数组
+      componentDidMount(){
+        console.log("@componentDidMount")
+
+        setInterval(() => {
+            const {newsArr,i} = this.state
+            const anew = '新闻' + (newsArr.length + 1)
+            this.setState({newsArr:[anew,...newsArr]})
+        }, 1000);
+        
+
+      }
+      getSnapshotBeforeUpdate(){
+        console.log("@getSnapshotBeforeUpdate",this.refs.list.scrollHeight)
+        return this.refs.list.scrollHeight
+      }
+      componentDidUpdate(provProp,prevState,height){
+        console.log("@componentDidUpdate")
+        this.refs.list.scrollTop += this.refs.list.scrollHeight - height
+        //this.refs.list.scrollTop += 30
+        console.log("@scrollHeight",this.refs.list.scrollHeight)
+        console.log("@scrollTop",this.refs.list.scrollTop)
+      }
+    
       render(){
+        console.log("@render",this)
         return(
-            <div className="list">
-               <div className="news">新闻7</div>
-               <div className="news">新闻6</div>
-               <div className="news">新闻5</div>
-               <div className="news">新闻4</div>
-               <div className="news">新闻3</div>
-               <div className="news">新闻2</div>
-               <div className="news">新闻1</div>
+            <div className="list" ref="list">
+                {
+                    this.state.newsArr.map((n,index) =>{
+                        return (<div className="news" key={index}>{n}</div>)
+
+                    }
+
+                    )
+
+                }
+          
             </div>
 
 
